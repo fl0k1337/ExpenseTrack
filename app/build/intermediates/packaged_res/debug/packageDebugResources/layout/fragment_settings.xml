@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Настройки"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- СЕКЦИЯ: ПРОФИЛЬ -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ПРОФИЛЬ"
+            android:textSize="12sp"
+            android:layout_marginStart="8dp"
+            android:textColor="?attr/colorPrimary"/>
+
+        <!-- Карточка Имени (уже была) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#E0E0E0">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="👤" android:textSize="20sp" />
+                <TextView android:id="@+id/tvCurrentName" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Ваше имя" android:layout_marginStart="16dp" android:textStyle="bold"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Изменить" android:textColor="?attr/colorPrimary" android:textSize="12sp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- НОВАЯ КАРТОЧКА: Почта пользователя -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#E0E0E0">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📧" android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/tvUserEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="email@example.com"
+                    android:layout_marginStart="16dp"
+                    android:textStyle="normal"
+                    android:textColor="#757575"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- НОВАЯ КНОПКА: Выход из аккаунта -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Выйти из аккаунта"
+            android:textColor="#F44336"
+            android:textSize="12sp"
+            app:icon="@android:drawable/ic_lock_power_off"
+            app:iconTint="#F44336"
+            app:iconSize="14dp" />
+        <!-- СЕКЦИЯ: ВНЕШНИЙ ВИД -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ВНЕШНИЙ ВИД" android:textSize="12sp" android:layout_marginTop="24dp" android:layout_marginStart="8dp" android:textColor="?attr/colorPrimary"/>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#E0E0E0">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                <!-- Темная тема -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🌙" android:textSize="20sp" />
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Темная тема" android:layout_marginStart="16dp" android:textStyle="bold"/>
+                    <com.google.android.material.materialswitch.MaterialSwitch android:id="@+id/switchDark" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginHorizontal="16dp"/>
+                <!-- Валюта -->
+                <LinearLayout android:id="@+id/btnCurrency" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💵" android:textSize="20sp" />
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Основная валюта" android:layout_marginStart="16dp" android:textStyle="bold"/>
+                    <TextView android:id="@+id/tvCurrentCurrency" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="₽" android:textColor="#757575"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- СЕКЦИЯ: ПОМОЩЬ -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ПОМОЩЬ" android:textSize="12sp" android:layout_marginTop="24dp" android:layout_marginStart="8dp" android:textColor="?attr/colorPrimary"/>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnInstruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#E0E0E0">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📖" android:textSize="20sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Инструкция" android:layout_marginStart="16dp" android:textStyle="bold"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="❯" android:textColor="#BDBDBD"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- СЕКЦИЯ: ДАННЫЕ -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReset"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Удалить все данные"
+            android:textColor="#F44336"
+            app:icon="@android:drawable/ic_menu_delete"
+            app:iconTint="#F44336"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ExpenseTracker v1.5\nКурсовая работа"
+            android:textAlignment="center"
+            android:layout_marginTop="16dp"
+            android:textColor="#9E9E9E"
+            android:textSize="10sp"/>
+
+    </LinearLayout>
+</ScrollView>
