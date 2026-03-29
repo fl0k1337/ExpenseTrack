@@ -12,7 +12,6 @@ import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseHolder> {
     private List<Expense> expenses = new ArrayList<>();

@@ -12,12 +12,12 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
+
 
 public class AddExpenseSheet extends BottomSheetDialogFragment {
 
     public interface OnExpenseAddedListener {
-        void onAdded(String title, double amount, String category, String description, long date, boolean isRecurring, String userId);
+        void onAdded(String title, double amount, String category, String description, long date, boolean isRecurring);
     }
 
     private OnExpenseAddedListener listener;
@@ -82,10 +82,9 @@ public class AddExpenseSheet extends BottomSheetDialogFragment {
                 double amount = Double.parseDouble(amountStr);
                 int chipId = chipGroup.getCheckedChipId();
                 String category = (chipId != -1) ? ((Chip) v.findViewById(chipId)).getText().toString() : "Прочее";
-                String currentUserId = com.google.firebase.auth.FirebaseAuth.getInstance().getUid();
 
                 if (listener != null) {
-                    listener.onAdded(titleStr, amount, category, desc, selectedDate, isRecurringMode, currentUserId);
+                    listener.onAdded(titleStr, amount, category, desc, selectedDate, isRecurringMode);
                 }
                 dismiss();
             } catch (Exception e) {

@@ -3,7 +3,6 @@ package com.example.expensetracker;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class PreferenceManager {
     private static final String PREF_NAME = "finance_prefs";

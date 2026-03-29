@@ -48,7 +48,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR ABORT INTO `expenses` (`id`,`title`,`amount`,`category`,`userId`,`description`,`date`,`isRecurring`) VALUES (nullif(?, 0),?,?,?,?,?,?,?)";
+        return "INSERT OR ABORT INTO `expenses` (`id`,`title`,`amount`,`category`,`description`,`date`,`isRecurring`) VALUES (nullif(?, 0),?,?,?,?,?,?)";
       }
 
       @Override
@@ -65,19 +65,14 @@ public final class ExpenseDao_Impl implements ExpenseDao {
         } else {
           statement.bindString(4, entity.category);
         }
-        if (entity.userId == null) {
+        if (entity.description == null) {
           statement.bindNull(5);
         } else {
-          statement.bindString(5, entity.userId);
+          statement.bindString(5, entity.description);
         }
-        if (entity.description == null) {
-          statement.bindNull(6);
-        } else {
-          statement.bindString(6, entity.description);
-        }
-        statement.bindLong(7, entity.date);
+        statement.bindLong(6, entity.date);
         final int _tmp = entity.isRecurring ? 1 : 0;
-        statement.bindLong(8, _tmp);
+        statement.bindLong(7, _tmp);
       }
     };
     this.__insertionAdapterOfGoal = new EntityInsertionAdapter<Goal>(__db) {
@@ -115,7 +110,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `expenses` SET `id` = ?,`title` = ?,`amount` = ?,`category` = ?,`userId` = ?,`description` = ?,`date` = ?,`isRecurring` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `expenses` SET `id` = ?,`title` = ?,`amount` = ?,`category` = ?,`description` = ?,`date` = ?,`isRecurring` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -132,20 +127,15 @@ public final class ExpenseDao_Impl implements ExpenseDao {
         } else {
           statement.bindString(4, entity.category);
         }
-        if (entity.userId == null) {
+        if (entity.description == null) {
           statement.bindNull(5);
         } else {
-          statement.bindString(5, entity.userId);
+          statement.bindString(5, entity.description);
         }
-        if (entity.description == null) {
-          statement.bindNull(6);
-        } else {
-          statement.bindString(6, entity.description);
-        }
-        statement.bindLong(7, entity.date);
+        statement.bindLong(6, entity.date);
         final int _tmp = entity.isRecurring ? 1 : 0;
-        statement.bindLong(8, _tmp);
-        statement.bindLong(9, entity.id);
+        statement.bindLong(7, _tmp);
+        statement.bindLong(8, entity.id);
       }
     };
     this.__updateAdapterOfGoal = new EntityDeletionOrUpdateAdapter<Goal>(__db) {
@@ -172,7 +162,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
       @Override
       @NonNull
       public String createQuery() {
-        final String _query = "DELETE FROM expenses WHERE userId = ?";
+        final String _query = "DELETE FROM expenses";
         return _query;
       }
     };
@@ -247,15 +237,9 @@ public final class ExpenseDao_Impl implements ExpenseDao {
   }
 
   @Override
-  public void deleteAll(final String uid) {
+  public void deleteAll() {
     __db.assertNotSuspendingTransaction();
     final SupportSQLiteStatement _stmt = __preparedStmtOfDeleteAll.acquire();
-    int _argIndex = 1;
-    if (uid == null) {
-      _stmt.bindNull(_argIndex);
-    } else {
-      _stmt.bindString(_argIndex, uid);
-    }
     try {
       __db.beginTransaction();
       try {
@@ -287,15 +271,9 @@ public final class ExpenseDao_Impl implements ExpenseDao {
   }
 
   @Override
-  public LiveData<List<Expense>> getAllExpensesForUser(final String uid) {
-    final String _sql = "SELECT * FROM expenses WHERE userId = ? ORDER BY date DESC";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
-    int _argIndex = 1;
-    if (uid == null) {
-      _statement.bindNull(_argIndex);
-    } else {
-      _statement.bindString(_argIndex, uid);
-    }
+  public LiveData<List<Expense>> getAllExpenses() {
+    final String _sql = "SELECT * FROM expenses ORDER BY date DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     return __db.getInvalidationTracker().createLiveData(new String[] {"expenses"}, false, new Callable<List<Expense>>() {
       @Override
       @Nullable
@@ -306,7 +284,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
           final int _cursorIndexOfAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "amount");
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
-          final int _cursorIndexOfUserId = CursorUtil.getColumnIndexOrThrow(_cursor, "userId");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfIsRecurring = CursorUtil.getColumnIndexOrThrow(_cursor, "isRecurring");
@@ -327,12 +304,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
             }
-            final String _tmpUserId;
-            if (_cursor.isNull(_cursorIndexOfUserId)) {
-              _tmpUserId = null;
-            } else {
-              _tmpUserId = _cursor.getString(_cursorIndexOfUserId);
-            }
             final String _tmpDescription;
             if (_cursor.isNull(_cursorIndexOfDescription)) {
               _tmpDescription = null;
@@ -345,7 +316,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             final int _tmp;
             _tmp = _cursor.getInt(_cursorIndexOfIsRecurring);
             _tmpIsRecurring = _tmp != 0;
-            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpUserId,_tmpDescription,_tmpDate,_tmpIsRecurring);
+            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpDescription,_tmpDate,_tmpIsRecurring);
             _item.id = _cursor.getInt(_cursorIndexOfId);
             _result.add(_item);
           }
@@ -363,15 +334,9 @@ public final class ExpenseDao_Impl implements ExpenseDao {
   }
 
   @Override
-  public LiveData<List<Expense>> getSimpleExpenses(final String uid) {
-    final String _sql = "SELECT * FROM expenses WHERE userId = ? AND isRecurring = 0 ORDER BY date DESC";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
-    int _argIndex = 1;
-    if (uid == null) {
-      _statement.bindNull(_argIndex);
-    } else {
-      _statement.bindString(_argIndex, uid);
-    }
+  public LiveData<List<Expense>> getSimpleExpenses() {
+    final String _sql = "SELECT * FROM expenses WHERE isRecurring = 0 ORDER BY date DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     return __db.getInvalidationTracker().createLiveData(new String[] {"expenses"}, false, new Callable<List<Expense>>() {
       @Override
       @Nullable
@@ -382,7 +347,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
           final int _cursorIndexOfAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "amount");
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
-          final int _cursorIndexOfUserId = CursorUtil.getColumnIndexOrThrow(_cursor, "userId");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfIsRecurring = CursorUtil.getColumnIndexOrThrow(_cursor, "isRecurring");
@@ -403,12 +367,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
             }
-            final String _tmpUserId;
-            if (_cursor.isNull(_cursorIndexOfUserId)) {
-              _tmpUserId = null;
-            } else {
-              _tmpUserId = _cursor.getString(_cursorIndexOfUserId);
-            }
             final String _tmpDescription;
             if (_cursor.isNull(_cursorIndexOfDescription)) {
               _tmpDescription = null;
@@ -421,7 +379,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             final int _tmp;
             _tmp = _cursor.getInt(_cursorIndexOfIsRecurring);
             _tmpIsRecurring = _tmp != 0;
-            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpUserId,_tmpDescription,_tmpDate,_tmpIsRecurring);
+            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpDescription,_tmpDate,_tmpIsRecurring);
             _item.id = _cursor.getInt(_cursorIndexOfId);
             _result.add(_item);
           }
@@ -439,15 +397,9 @@ public final class ExpenseDao_Impl implements ExpenseDao {
   }
 
   @Override
-  public LiveData<List<Expense>> getSimpleExpensesDesc(final String uid) {
-    final String _sql = "SELECT * FROM expenses WHERE userId = ? AND isRecurring = 0 ORDER BY amount DESC";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
-    int _argIndex = 1;
-    if (uid == null) {
-      _statement.bindNull(_argIndex);
-    } else {
-      _statement.bindString(_argIndex, uid);
-    }
+  public LiveData<List<Expense>> getSimpleExpensesDesc() {
+    final String _sql = "SELECT * FROM expenses WHERE isRecurring = 0 ORDER BY amount DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     return __db.getInvalidationTracker().createLiveData(new String[] {"expenses"}, false, new Callable<List<Expense>>() {
       @Override
       @Nullable
@@ -458,7 +410,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
           final int _cursorIndexOfAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "amount");
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
-          final int _cursorIndexOfUserId = CursorUtil.getColumnIndexOrThrow(_cursor, "userId");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfIsRecurring = CursorUtil.getColumnIndexOrThrow(_cursor, "isRecurring");
@@ -479,12 +430,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
             }
-            final String _tmpUserId;
-            if (_cursor.isNull(_cursorIndexOfUserId)) {
-              _tmpUserId = null;
-            } else {
-              _tmpUserId = _cursor.getString(_cursorIndexOfUserId);
-            }
             final String _tmpDescription;
             if (_cursor.isNull(_cursorIndexOfDescription)) {
               _tmpDescription = null;
@@ -497,7 +442,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             final int _tmp;
             _tmp = _cursor.getInt(_cursorIndexOfIsRecurring);
             _tmpIsRecurring = _tmp != 0;
-            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpUserId,_tmpDescription,_tmpDate,_tmpIsRecurring);
+            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpDescription,_tmpDate,_tmpIsRecurring);
             _item.id = _cursor.getInt(_cursorIndexOfId);
             _result.add(_item);
           }
@@ -515,15 +460,9 @@ public final class ExpenseDao_Impl implements ExpenseDao {
   }
 
   @Override
-  public LiveData<List<Expense>> getSimpleExpensesAsc(final String uid) {
-    final String _sql = "SELECT * FROM expenses WHERE userId = ? AND isRecurring = 0 ORDER BY amount ASC";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
-    int _argIndex = 1;
-    if (uid == null) {
-      _statement.bindNull(_argIndex);
-    } else {
-      _statement.bindString(_argIndex, uid);
-    }
+  public LiveData<List<Expense>> getSimpleExpensesAsc() {
+    final String _sql = "SELECT * FROM expenses WHERE isRecurring = 0 ORDER BY amount ASC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     return __db.getInvalidationTracker().createLiveData(new String[] {"expenses"}, false, new Callable<List<Expense>>() {
       @Override
       @Nullable
@@ -534,7 +473,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
           final int _cursorIndexOfAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "amount");
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
-          final int _cursorIndexOfUserId = CursorUtil.getColumnIndexOrThrow(_cursor, "userId");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfIsRecurring = CursorUtil.getColumnIndexOrThrow(_cursor, "isRecurring");
@@ -555,12 +493,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
             }
-            final String _tmpUserId;
-            if (_cursor.isNull(_cursorIndexOfUserId)) {
-              _tmpUserId = null;
-            } else {
-              _tmpUserId = _cursor.getString(_cursorIndexOfUserId);
-            }
             final String _tmpDescription;
             if (_cursor.isNull(_cursorIndexOfDescription)) {
               _tmpDescription = null;
@@ -573,7 +505,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             final int _tmp;
             _tmp = _cursor.getInt(_cursorIndexOfIsRecurring);
             _tmpIsRecurring = _tmp != 0;
-            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpUserId,_tmpDescription,_tmpDate,_tmpIsRecurring);
+            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpDescription,_tmpDate,_tmpIsRecurring);
             _item.id = _cursor.getInt(_cursorIndexOfId);
             _result.add(_item);
           }
@@ -591,15 +523,9 @@ public final class ExpenseDao_Impl implements ExpenseDao {
   }
 
   @Override
-  public LiveData<List<Expense>> getRecurringExpenses(final String uid) {
-    final String _sql = "SELECT * FROM expenses WHERE userId = ? AND isRecurring = 1";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
-    int _argIndex = 1;
-    if (uid == null) {
-      _statement.bindNull(_argIndex);
-    } else {
-      _statement.bindString(_argIndex, uid);
-    }
+  public LiveData<List<Expense>> getRecurringExpenses() {
+    final String _sql = "SELECT * FROM expenses WHERE isRecurring = 1";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     return __db.getInvalidationTracker().createLiveData(new String[] {"expenses"}, false, new Callable<List<Expense>>() {
       @Override
       @Nullable
@@ -610,7 +536,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
           final int _cursorIndexOfAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "amount");
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
-          final int _cursorIndexOfUserId = CursorUtil.getColumnIndexOrThrow(_cursor, "userId");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfIsRecurring = CursorUtil.getColumnIndexOrThrow(_cursor, "isRecurring");
@@ -631,12 +556,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
             }
-            final String _tmpUserId;
-            if (_cursor.isNull(_cursorIndexOfUserId)) {
-              _tmpUserId = null;
-            } else {
-              _tmpUserId = _cursor.getString(_cursorIndexOfUserId);
-            }
             final String _tmpDescription;
             if (_cursor.isNull(_cursorIndexOfDescription)) {
               _tmpDescription = null;
@@ -649,7 +568,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             final int _tmp;
             _tmp = _cursor.getInt(_cursorIndexOfIsRecurring);
             _tmpIsRecurring = _tmp != 0;
-            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpUserId,_tmpDescription,_tmpDate,_tmpIsRecurring);
+            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpDescription,_tmpDate,_tmpIsRecurring);
             _item.id = _cursor.getInt(_cursorIndexOfId);
             _result.add(_item);
           }
@@ -667,19 +586,12 @@ public final class ExpenseDao_Impl implements ExpenseDao {
   }
 
   @Override
-  public LiveData<List<Expense>> getExpensesBetweenDates(final String uid, final long start,
-      final long end) {
-    final String _sql = "SELECT * FROM expenses WHERE userId = ? AND date BETWEEN ? AND ? ORDER BY date DESC";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 3);
+  public LiveData<List<Expense>> getExpensesBetweenDates(final long start, final long end) {
+    final String _sql = "SELECT * FROM expenses WHERE date BETWEEN ? AND ? ORDER BY date DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
     int _argIndex = 1;
-    if (uid == null) {
-      _statement.bindNull(_argIndex);
-    } else {
-      _statement.bindString(_argIndex, uid);
-    }
-    _argIndex = 2;
     _statement.bindLong(_argIndex, start);
-    _argIndex = 3;
+    _argIndex = 2;
     _statement.bindLong(_argIndex, end);
     return __db.getInvalidationTracker().createLiveData(new String[] {"expenses"}, false, new Callable<List<Expense>>() {
       @Override
@@ -691,7 +603,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
           final int _cursorIndexOfAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "amount");
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
-          final int _cursorIndexOfUserId = CursorUtil.getColumnIndexOrThrow(_cursor, "userId");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfIsRecurring = CursorUtil.getColumnIndexOrThrow(_cursor, "isRecurring");
@@ -712,12 +623,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
             }
-            final String _tmpUserId;
-            if (_cursor.isNull(_cursorIndexOfUserId)) {
-              _tmpUserId = null;
-            } else {
-              _tmpUserId = _cursor.getString(_cursorIndexOfUserId);
-            }
             final String _tmpDescription;
             if (_cursor.isNull(_cursorIndexOfDescription)) {
               _tmpDescription = null;
@@ -730,7 +635,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             final int _tmp;
             _tmp = _cursor.getInt(_cursorIndexOfIsRecurring);
             _tmpIsRecurring = _tmp != 0;
-            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpUserId,_tmpDescription,_tmpDate,_tmpIsRecurring);
+            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpDescription,_tmpDate,_tmpIsRecurring);
             _item.id = _cursor.getInt(_cursorIndexOfId);
             _result.add(_item);
           }
@@ -748,22 +653,16 @@ public final class ExpenseDao_Impl implements ExpenseDao {
   }
 
   @Override
-  public LiveData<List<Expense>> searchExpenses(final String uid, final String query) {
-    final String _sql = "SELECT * FROM expenses WHERE userId = ? AND (title LIKE ? OR category LIKE ?) ORDER BY date DESC";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 3);
+  public LiveData<List<Expense>> searchExpenses(final String query) {
+    final String _sql = "SELECT * FROM expenses WHERE title LIKE ? OR category LIKE ? ORDER BY date DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
     int _argIndex = 1;
-    if (uid == null) {
-      _statement.bindNull(_argIndex);
-    } else {
-      _statement.bindString(_argIndex, uid);
-    }
-    _argIndex = 2;
     if (query == null) {
       _statement.bindNull(_argIndex);
     } else {
       _statement.bindString(_argIndex, query);
     }
-    _argIndex = 3;
+    _argIndex = 2;
     if (query == null) {
       _statement.bindNull(_argIndex);
     } else {
@@ -779,7 +678,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
           final int _cursorIndexOfAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "amount");
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
-          final int _cursorIndexOfUserId = CursorUtil.getColumnIndexOrThrow(_cursor, "userId");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfIsRecurring = CursorUtil.getColumnIndexOrThrow(_cursor, "isRecurring");
@@ -800,12 +698,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
             }
-            final String _tmpUserId;
-            if (_cursor.isNull(_cursorIndexOfUserId)) {
-              _tmpUserId = null;
-            } else {
-              _tmpUserId = _cursor.getString(_cursorIndexOfUserId);
-            }
             final String _tmpDescription;
             if (_cursor.isNull(_cursorIndexOfDescription)) {
               _tmpDescription = null;
@@ -818,7 +710,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             final int _tmp;
             _tmp = _cursor.getInt(_cursorIndexOfIsRecurring);
             _tmpIsRecurring = _tmp != 0;
-            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpUserId,_tmpDescription,_tmpDate,_tmpIsRecurring);
+            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpDescription,_tmpDate,_tmpIsRecurring);
             _item.id = _cursor.getInt(_cursorIndexOfId);
             _result.add(_item);
           }
@@ -836,21 +728,15 @@ public final class ExpenseDao_Impl implements ExpenseDao {
   }
 
   @Override
-  public LiveData<List<Expense>> getFilteredExpenses(final String uid, final double min,
-      final double max, final String cat) {
-    final String _sql = "SELECT * FROM expenses WHERE userId = ? AND isRecurring = 0 AND amount >= ? AND amount <= ? AND category LIKE ? ORDER BY amount DESC";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 4);
+  public LiveData<List<Expense>> getFilteredExpenses(final double min, final double max,
+      final String cat) {
+    final String _sql = "SELECT * FROM expenses WHERE isRecurring = 0 AND amount >= ? AND amount <= ? AND category LIKE ? ORDER BY amount DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 3);
     int _argIndex = 1;
-    if (uid == null) {
-      _statement.bindNull(_argIndex);
-    } else {
-      _statement.bindString(_argIndex, uid);
-    }
-    _argIndex = 2;
     _statement.bindDouble(_argIndex, min);
-    _argIndex = 3;
+    _argIndex = 2;
     _statement.bindDouble(_argIndex, max);
-    _argIndex = 4;
+    _argIndex = 3;
     if (cat == null) {
       _statement.bindNull(_argIndex);
     } else {
@@ -866,7 +752,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
           final int _cursorIndexOfAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "amount");
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
-          final int _cursorIndexOfUserId = CursorUtil.getColumnIndexOrThrow(_cursor, "userId");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfIsRecurring = CursorUtil.getColumnIndexOrThrow(_cursor, "isRecurring");
@@ -887,12 +772,6 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
             }
-            final String _tmpUserId;
-            if (_cursor.isNull(_cursorIndexOfUserId)) {
-              _tmpUserId = null;
-            } else {
-              _tmpUserId = _cursor.getString(_cursorIndexOfUserId);
-            }
             final String _tmpDescription;
             if (_cursor.isNull(_cursorIndexOfDescription)) {
               _tmpDescription = null;
@@ -905,7 +784,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             final int _tmp;
             _tmp = _cursor.getInt(_cursorIndexOfIsRecurring);
             _tmpIsRecurring = _tmp != 0;
-            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpUserId,_tmpDescription,_tmpDate,_tmpIsRecurring);
+            _item = new Expense(_tmpTitle,_tmpAmount,_tmpCategory,_tmpDescription,_tmpDate,_tmpIsRecurring);
             _item.id = _cursor.getInt(_cursorIndexOfId);
             _result.add(_item);
           }

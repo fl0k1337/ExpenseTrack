@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.expensetracker.app-mergeDebugResources-38:/values-land/values-land.xml",
+            "outputFile": "com.example.expensetracker.app-mergeDebugResources-33:/values-land/values-land.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\azamat.tursunov\\.gradle\\caches\\9.3.1\\transforms\\72c87ce028ff76891221d0b7d9c6a2bf\\workspace\\transformed\\material-1.11.0\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\Penis\\.gradle\\caches\\9.3.1\\transforms\\c3e3edac2cf2cc19f18fbeed49eb7392\\workspace\\transformed\\material-1.11.0\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,26,35,40",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\azamat.tursunov\\.gradle\\caches\\9.3.1\\transforms\\b0d476c94b8fe3924df960339a0c7a71\\workspace\\transformed\\appcompat-1.6.1\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\Penis\\.gradle\\caches\\9.3.1\\transforms\\afacb893bcf6dfd5067b9e230e4e2ddd\\workspace\\transformed\\appcompat-1.6.1\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",

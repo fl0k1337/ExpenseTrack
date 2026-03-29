@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class PlannedFragment extends Fragment {
     private ExpenseViewModel viewModel;
@@ -108,8 +107,8 @@ public class PlannedFragment extends Fragment {
         v.findViewById(R.id.fabAddRecurring).setOnClickListener(view -> {
             AddExpenseSheet sheet = new AddExpenseSheet();
             sheet.setRecurringMode(true);
-            sheet.setListener((title, amount, category, description, date, isRecurring, userId) -> {
-                viewModel.insert(new Expense(title, amount, category, userId, description, date, true));
+            sheet.setListener((title, amount, category, description, date, isRecurring) -> {
+                viewModel.insert(new Expense(title, amount, category, description, date, true));
             });
             sheet.show(getChildFragmentManager(), "add_recurring");
         });

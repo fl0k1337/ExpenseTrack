@@ -1,0 +1,3053 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+build.gradle.kts
+google-services.json
+proguard-rules.pro
+src/androidTest/java/com/example/expensetracker/ExampleInstrumentedTest.java
+src/main/AndroidManifest.xml
+src/main/java/com/example/expensetracker/Achievement.java
+src/main/java/com/example/expensetracker/AddExpenseSheet.java
+src/main/java/com/example/expensetracker/AppDatabase.java
+src/main/java/com/example/expensetracker/AuthActivity.java
+src/main/java/com/example/expensetracker/CategoryColorMapper.java
+src/main/java/com/example/expensetracker/Expense.java
+src/main/java/com/example/expensetracker/ExpenseAdapter.java
+src/main/java/com/example/expensetracker/ExpenseDao.java
+src/main/java/com/example/expensetracker/ExpenseViewModel.java
+src/main/java/com/example/expensetracker/Goal.java
+src/main/java/com/example/expensetracker/HomeFragment.java
+src/main/java/com/example/expensetracker/MainActivity.java
+src/main/java/com/example/expensetracker/PlannedFragment.java
+src/main/java/com/example/expensetracker/PreferenceManager.java
+src/main/java/com/example/expensetracker/SettingsFragment.java
+src/main/java/com/example/expensetracker/StatsFragment.java
+src/main/res/drawable/circle.xml
+src/main/res/drawable/ic_launcher_background.xml
+src/main/res/drawable/ic_launcher_foreground.xml
+src/main/res/drawable/rounded_sheet.xml
+src/main/res/layout/activity_auth.xml
+src/main/res/layout/activity_main.xml
+src/main/res/layout/dialog_add.xml
+src/main/res/layout/dialog_filter.xml
+src/main/res/layout/expense_item.xml
+src/main/res/layout/fragment_home.xml
+src/main/res/layout/fragment_planned.xml
+src/main/res/layout/fragment_settings.xml
+src/main/res/layout/fragment_stats.xml
+src/main/res/layout/item_achievement.xml
+src/main/res/layout/item_category_stat.xml
+src/main/res/layout/sheet_add_expense.xml
+src/main/res/menu/bottom_nav_menu.xml
+src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+src/main/res/mipmap-hdpi/ic_launcher_round.webp
+src/main/res/mipmap-hdpi/ic_launcher.webp
+src/main/res/mipmap-mdpi/ic_launcher_round.webp
+src/main/res/mipmap-mdpi/ic_launcher.webp
+src/main/res/mipmap-xhdpi/ic_launcher_round.webp
+src/main/res/mipmap-xhdpi/ic_launcher.webp
+src/main/res/mipmap-xxhdpi/ic_launcher_round.webp
+src/main/res/mipmap-xxhdpi/ic_launcher.webp
+src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp
+src/main/res/mipmap-xxxhdpi/ic_launcher.webp
+src/main/res/values-night/themes.xml
+src/main/res/values/colors.xml
+src/main/res/values/strings.xml
+src/main/res/values/themes.xml
+src/main/res/xml/backup_rules.xml
+src/main/res/xml/data_extraction_rules.xml
+src/test/java/com/example/expensetracker/ExampleUnitTest.java
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="build.gradle.kts">
+plugins {
+    alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
+}
+
+android {
+    namespace = "com.example.expensetracker"
+    compileSdk = 34 // Просто число 34
+
+    defaultConfig {
+        applicationId = "com.example.expensetracker"
+        minSdk = 24
+        targetSdk = 34 // Тоже 34
+        versionCode = 1
+        versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-livedata:2.6.2")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+}
+</file>
+
+<file path="google-services.json">
+{
+  "project_info": {
+    "project_number": "1041841659528",
+    "project_id": "expensetracker-c2478",
+    "storage_bucket": "expensetracker-c2478.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041841659528:android:cd19b074637db1792f493d",
+        "android_client_info": {
+          "package_name": "com.example.expensetracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASvyC6dV0AhMJf4T8CglpbhOERgJt7atQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+</file>
+
+<file path="proguard-rules.pro">
+# Add project specific ProGuard rules here.
+# You can control the set of applied configuration files using the
+# proguardFiles setting in build.gradle.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+
+# Uncomment this to preserve the line number information for
+# debugging stack traces.
+#-keepattributes SourceFile,LineNumberTable
+
+# If you keep the line number information, uncomment this to
+# hide the original source file name.
+#-renamesourcefileattribute SourceFile
+</file>
+
+<file path="src/androidTest/java/com/example/expensetracker/ExampleInstrumentedTest.java">
+package com.example.expensetracker;
+
+import android.content.Context;
+
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static org.junit.Assert.*;
+
+/**
+ * Instrumented test, which will execute on an Android device.
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ */
+@RunWith(AndroidJUnit4.class)
+public class ExampleInstrumentedTest {
+    @Test
+    public void useAppContext() {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertEquals("com.example.expensetracker", appContext.getPackageName());
+    }
+}
+</file>
+
+<file path="src/main/AndroidManifest.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ExpenseTracker">
+        <activity
+            android:name=".AuthActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" android:exported="false" />
+    </application>
+
+</manifest>
+</file>
+
+<file path="src/main/java/com/example/expensetracker/Achievement.java">
+package com.example.expensetracker;
+
+public class Achievement {
+    public String title, description, icon;
+    public int currentProgress, maxProgress; // Для прогресс-бара
+    public int color; // Цвет карточки (для ранга)
+
+    public Achievement(String title, String description, String icon, int currentProgress, int maxProgress, int color) {
+        this.title = title;
+        this.description = description;
+        this.icon = icon;
+        this.currentProgress = currentProgress;
+        this.maxProgress = maxProgress;
+        this.color = color;
+    }
+
+    public boolean isUnlocked() {
+        return currentProgress >= maxProgress;
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/AddExpenseSheet.java">
+package com.example.expensetracker;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class AddExpenseSheet extends BottomSheetDialogFragment {
+
+    public interface OnExpenseAddedListener {
+        void onAdded(String title, double amount, String category, String description, long date, boolean isRecurring, String userId);
+    }
+
+    private OnExpenseAddedListener listener;
+    private Expense existingExpense;
+    private boolean isRecurringMode = false;
+    private long selectedDate = System.currentTimeMillis();
+
+    public void setListener(OnExpenseAddedListener listener) { this.listener = listener; }
+    public void setExistingExpense(Expense expense) { this.existingExpense = expense; }
+    public void setRecurringMode(boolean recurringMode) { this.isRecurringMode = recurringMode; }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.sheet_add_expense, container, false);
+
+
+        TextInputEditText etTitle = v.findViewById(R.id.etTitle);
+        TextInputEditText etAmount = v.findViewById(R.id.etAmount);
+        TextInputEditText etDescription = v.findViewById(R.id.etDescription);
+        ChipGroup chipGroup = v.findViewById(R.id.categoryChips);
+        MaterialButton btnSave = v.findViewById(R.id.btnSave);
+        MaterialButton btnPickDateTop = v.findViewById(R.id.btnPickDateTop);
+        TextView tvSheetTitle = v.findViewById(R.id.sheetTitle);
+
+        if (isRecurringMode) tvSheetTitle.setText("Новая подписка");
+
+        if (existingExpense != null) {
+            tvSheetTitle.setText("Изменить");
+            etTitle.setText(existingExpense.title);
+            etAmount.setText(String.valueOf(existingExpense.amount));
+            etDescription.setText(existingExpense.description);
+            selectedDate = existingExpense.date;
+
+            for (int i = 0; i < chipGroup.getChildCount(); i++) {
+                Chip chip = (Chip) chipGroup.getChildAt(i);
+                if (chip.getText().toString().equals(existingExpense.category)) {
+                    chip.setChecked(true);
+                    break;
+                }
+            }
+        }
+
+        btnPickDateTop.setOnClickListener(view -> {
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.setTimeInMillis(selectedDate);
+            new android.app.DatePickerDialog(getContext(), (datePicker, y, m, d) -> {
+                cal.set(y, m, d);
+                selectedDate = cal.getTimeInMillis();
+                Toast.makeText(getContext(), "Дата выбрана", Toast.LENGTH_SHORT).show();
+            }, cal.get(java.util.Calendar.YEAR), cal.get(java.util.Calendar.MONTH), cal.get(java.util.Calendar.DAY_OF_MONTH)).show();
+        });
+
+
+        btnSave.setOnClickListener(view -> {
+            String titleStr = etTitle.getText().toString().trim();
+            String amountStr = etAmount.getText().toString().trim();
+            String desc = etDescription.getText().toString();
+
+            if (titleStr.isEmpty() || amountStr.isEmpty()) return;
+
+            try {
+                double amount = Double.parseDouble(amountStr);
+                int chipId = chipGroup.getCheckedChipId();
+                String category = (chipId != -1) ? ((Chip) v.findViewById(chipId)).getText().toString() : "Прочее";
+                String currentUserId = com.google.firebase.auth.FirebaseAuth.getInstance().getUid();
+
+                if (listener != null) {
+                    listener.onAdded(titleStr, amount, category, desc, selectedDate, isRecurringMode, currentUserId);
+                }
+                dismiss();
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Ошибка данных", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return v;
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/AppDatabase.java">
+package com.example.expensetracker;
+
+import android.content.Context;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import com.google.firebase.auth.FirebaseAuth;
+
+@Database(entities = {Expense.class, Goal.class}, version = 7, exportSchema = false)
+public abstract class AppDatabase extends RoomDatabase {
+    public abstract ExpenseDao expenseDao();
+    private static volatile AppDatabase INSTANCE;
+    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(4);
+
+    static AppDatabase getDatabase(final Context context) {
+        if (INSTANCE == null) {
+            synchronized (AppDatabase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                                    AppDatabase.class, "expense_db")
+                            .fallbackToDestructiveMigration()
+                            .build();
+
+                }
+            }
+        }
+        return INSTANCE;
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/AuthActivity.java">
+package com.example.expensetracker;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.google.firebase.auth.FirebaseAuth;
+
+public class AuthActivity extends AppCompatActivity {
+    private FirebaseAuth mAuth;
+    private EditText etEmail, etPass;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_auth);
+
+        mAuth = FirebaseAuth.getInstance();
+        etEmail = findViewById(R.id.etEmail);
+        etPass = findViewById(R.id.etPass);
+
+        if (mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+
+        findViewById(R.id.btnRegister).setOnClickListener(v -> {
+            String email = etEmail.getText().toString();
+            String pass = etPass.getText().toString();
+            if (email.isEmpty() || pass.isEmpty()) return;
+
+            mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(this, "Ошибка: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+
+        findViewById(R.id.btnLogin).setOnClickListener(v -> {
+            String email = etEmail.getText().toString();
+            String pass = etPass.getText().toString();
+            if (email.isEmpty() || pass.isEmpty()) return;
+
+            mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ExpenseViewModel vm = new ViewModelProvider(this).get(ExpenseViewModel.class);
+                    vm.setUserId(mAuth.getUid());
+                    vm.downloadDataFromCloud(); // Пошла загрузка
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
+                }
+            });
+        });
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/CategoryColorMapper.java">
+package com.example.expensetracker;
+
+import android.graphics.Color;
+import java.util.HashMap;
+import java.util.Map;
+
+public class CategoryColorMapper {
+    private static final Map<String, CategoryInfo> categoryMap = new HashMap<>();
+
+    public static class CategoryInfo {
+        public int color;
+        public int iconRes;
+        public CategoryInfo(int color, int iconRes) {
+            this.color = color;
+            this.iconRes = iconRes;
+        }
+    }
+
+    static {
+        categoryMap.put("Еда", new CategoryInfo(Color.parseColor("#FF9800"), android.R.drawable.ic_menu_report_image));
+        categoryMap.put("Транспорт", new CategoryInfo(Color.parseColor("#2196F3"), android.R.drawable.ic_menu_directions));
+        categoryMap.put("Развлечения", new CategoryInfo(Color.parseColor("#9C27B0"), android.R.drawable.ic_menu_slideshow));
+        categoryMap.put("Жилье", new CategoryInfo(Color.parseColor("#4CAF50"), android.R.drawable.ic_menu_myplaces));
+        categoryMap.put("Здоровье", new CategoryInfo(Color.parseColor("#F44336"), android.R.drawable.ic_menu_add));
+        categoryMap.put("Покупки", new CategoryInfo(Color.parseColor("#FFEB3B"), android.R.drawable.ic_menu_manage));
+        categoryMap.put("Прочее", new CategoryInfo(Color.parseColor("#607D8B"), android.R.drawable.ic_menu_help));
+    }
+
+    public static int getColor(String category) {
+        CategoryInfo info = categoryMap.get(category);
+        return (info != null) ? info.color : Color.parseColor("#E91E63");
+    }
+
+    public static int getIcon(String category) {
+        CategoryInfo info = categoryMap.get(category);
+        return (info != null) ? info.iconRes : android.R.drawable.ic_menu_info_details;
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/Expense.java">
+package com.example.expensetracker;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "expenses")
+public class Expense {
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+    public String title;
+    public double amount;
+    public String category;
+    public String userId; // Оставляем для аккаунтов
+    public String description;
+    public long date;
+    public boolean isRecurring;
+
+    // Конструктор строго на 7 параметров
+    public Expense(String title, double amount, String category, String userId, String description, long date, boolean isRecurring) {
+        this.title = title;
+        this.amount = amount;
+        this.category = category;
+        this.userId = userId;
+        this.description = description;
+        this.date = date;
+        this.isRecurring = isRecurring;
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/ExpenseAdapter.java">
+package com.example.expensetracker;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseHolder> {
+    private List<Expense> expenses = new ArrayList<>();
+
+    @NonNull
+    @Override
+    public ExpenseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.expense_item, parent, false);
+        return new ExpenseHolder(view);
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Expense expense);
+    }
+    private OnItemClickListener listener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ExpenseHolder holder, int position) {
+        Expense current = expenses.get(position);
+        String currency = PreferenceManager.getCurrency(holder.itemView.getContext());
+
+        holder.tvTitle.setText(current.title);
+        holder.tvAmount.setText(String.format("%.2f %s", current.amount, currency));
+        holder.tvAmount.setTextColor(CategoryColorMapper.getColor(current.category));
+
+        holder.tvDescription.setText(current.description);
+        if (current.description == null || current.description.isEmpty()) {
+            holder.tvDescription.setVisibility(View.GONE);
+        } else {
+            holder.tvDescription.setVisibility(View.VISIBLE);
+        }
+
+        if (current.isRecurring) {
+            holder.tvCategory.setText(current.category + " • Ежемесячно");
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+            String dateString = sdf.format(new Date(current.date));
+            holder.tvCategory.setText(current.category + " • " + dateString);
+        }
+
+        holder.ivCategoryIcon.setImageResource(CategoryColorMapper.getIcon(current.category));
+        holder.ivCategoryIcon.setColorFilter(CategoryColorMapper.getColor(current.category));
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) listener.onItemClick(current);
+        });
+    }
+
+    @Override
+    public int getItemCount() { return expenses.size(); }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
+        notifyDataSetChanged();
+    }
+
+    public Expense getExpenseAt(int position) { return expenses.get(position); }
+
+    class ExpenseHolder extends RecyclerView.ViewHolder {
+        TextView tvTitle, tvCategory, tvAmount, tvDescription;
+        ImageView ivCategoryIcon;
+        public ExpenseHolder(View itemView) {
+            super(itemView);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvCategory = itemView.findViewById(R.id.tvCategory);
+            tvAmount = itemView.findViewById(R.id.tvAmount);
+            tvDescription = itemView.findViewById(R.id.tvDescription);
+            ivCategoryIcon = itemView.findViewById(R.id.ivCategoryIcon);
+        }
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/ExpenseDao.java">
+package com.example.expensetracker;
+
+import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
+import java.util.List;
+
+@Dao
+public interface ExpenseDao {
+    @Insert
+    void insert(Expense expense);
+
+    @Delete
+    void delete(Expense expense);
+
+    @Update
+    void update(Expense expense);
+
+    // Получить ВООБЩЕ ВСЕ записи пользователя (и обычные, и подписки)
+    @Query("SELECT * FROM expenses WHERE userId = :uid ORDER BY date DESC")
+    LiveData<List<Expense>> getAllExpensesForUser(String uid);
+
+    @Query("SELECT * FROM expenses WHERE userId = :uid AND isRecurring = 0 ORDER BY date DESC")
+    LiveData<List<Expense>> getSimpleExpenses(String uid);
+
+    // Сначала дорогие
+    @Query("SELECT * FROM expenses WHERE userId = :uid AND isRecurring = 0 ORDER BY amount DESC")
+    LiveData<List<Expense>> getSimpleExpensesDesc(String uid);
+
+    // Сначала дешевые
+    @Query("SELECT * FROM expenses WHERE userId = :uid AND isRecurring = 0 ORDER BY amount ASC")
+    LiveData<List<Expense>> getSimpleExpensesAsc(String uid);
+
+    @Query("SELECT * FROM expenses WHERE userId = :uid AND isRecurring = 1")
+    LiveData<List<Expense>> getRecurringExpenses(String uid);
+
+    @Query("SELECT * FROM expenses WHERE userId = :uid AND date BETWEEN :start AND :end ORDER BY date DESC")
+    LiveData<List<Expense>> getExpensesBetweenDates(String uid, long start, long end);
+
+    @Query("SELECT * FROM expenses WHERE userId = :uid AND (title LIKE :query OR category LIKE :query) ORDER BY date DESC")
+    LiveData<List<Expense>> searchExpenses(String uid, String query);
+
+    // Расширенный фильтр
+    @Query("SELECT * FROM expenses WHERE userId = :uid AND isRecurring = 0 AND amount >= :min AND amount <= :max AND category LIKE :cat ORDER BY amount DESC")
+    LiveData<List<Expense>> getFilteredExpenses(String uid, double min, double max, String cat);
+
+    @Query("DELETE FROM expenses WHERE userId = :uid")
+    void deleteAll(String uid);
+
+    // МЕТОДЫ ДЛЯ КОПИЛКИ
+    @Insert
+    void insertGoal(Goal goal);
+
+    @Query("SELECT * FROM goals LIMIT 1")
+    LiveData<Goal> getActiveGoal();
+
+    @Query("DELETE FROM goals")
+    void deleteGoals();
+
+    @Update
+    void updateGoal(Goal goal);
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/ExpenseViewModel.java">
+package com.example.expensetracker;
+
+import android.app.Application;
+import android.util.Log;
+import androidx.core.util.Pair;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+public class ExpenseViewModel extends AndroidViewModel {
+    private final ExpenseDao mDao;
+    private final MutableLiveData<String> currentUserId = new MutableLiveData<>();
+    private final MutableLiveData<Integer> sortOrder = new MutableLiveData<>(0);
+    private final MutableLiveData<Pair<Long, Long>> dateRange = new MutableLiveData<>();
+
+    public ExpenseViewModel(Application application) {
+        super(application);
+        mDao = AppDatabase.getDatabase(application).expenseDao();
+        currentUserId.setValue(FirebaseAuth.getInstance().getUid());
+        setPeriod(7); // По умолчанию показываем статистику за 7 дней
+    }
+
+    public void setUserId(String uid) { currentUserId.setValue(uid); }
+    public void setSortOrder(int order) { sortOrder.setValue(order); }
+
+    // --- ЧТЕНИЕ ДАННЫХ (Для HomeFragment) ---
+
+    // Получить ВСЕ траты (и обычные, и подписки)
+    public LiveData<List<Expense>> getAllExpenses() {
+        return Transformations.switchMap(currentUserId, uid -> mDao.getAllExpensesForUser(uid));
+    }
+
+    // Получить только обычные траты, с учетом сортировки (Двойной switchMap)
+    public LiveData<List<Expense>> getSortedSimpleExpenses() {
+        return Transformations.switchMap(currentUserId, uid ->
+                Transformations.switchMap(sortOrder, order -> {
+                    if (uid == null) return new MutableLiveData<>(new ArrayList<>());
+
+                    if (order == 1) return mDao.getSimpleExpensesDesc(uid); // Дорогие
+                    if (order == 2) return mDao.getSimpleExpensesAsc(uid);  // Дешевые
+                    return mDao.getSimpleExpenses(uid); // По дате (по умолчанию)
+                })
+        );
+    }
+
+    // --- ЧТЕНИЕ ДАННЫХ (Для StatsFragment) ---
+
+    // Получить траты за выбранный период
+    public LiveData<List<Expense>> getStatsExpenses() {
+        return Transformations.switchMap(currentUserId, uid ->
+                Transformations.switchMap(dateRange, range -> {
+                    if (uid == null) return new MutableLiveData<>(new ArrayList<>());
+                    return mDao.getExpensesBetweenDates(uid, range.first, range.second);
+                })
+        );
+    }
+
+    public void setPeriod(int days) {
+        Calendar cal = Calendar.getInstance();
+        // Конец дня сегодня (23:59:59)
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        long end = cal.getTimeInMillis();
+
+        long start;
+        if (days == 0) {
+            start = 0; // Всё время
+        } else {
+            // Начало дня N дней назад
+            cal.add(Calendar.DAY_OF_YEAR, -days);
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            start = cal.getTimeInMillis();
+        }
+        dateRange.setValue(new Pair<>(start, end));
+    }
+
+    public void setCustomRange(Long start, Long end) {
+        if (start != null && end != null) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(end);
+            cal.set(Calendar.HOUR_OF_DAY, 23);
+            cal.set(Calendar.MINUTE, 59);
+            cal.set(Calendar.SECOND, 59);
+            dateRange.setValue(new Pair<>(start, cal.getTimeInMillis()));
+        }
+    }
+
+    // --- ПОИСК И ФИЛЬТРЫ ---
+
+    public LiveData<List<Expense>> search(String text) {
+        return Transformations.switchMap(currentUserId, uid -> mDao.searchExpenses(uid, "%" + text + "%"));
+    }
+
+    public LiveData<List<Expense>> getFiltered(double min, double max, String cat) {
+        String cp = cat.equals("Все") ? "%" : cat;
+        return Transformations.switchMap(currentUserId, uid -> mDao.getFilteredExpenses(uid, min, max, cp));
+    }
+
+    // --- ПОДПИСКИ И ЦЕЛИ (Для PlannedFragment) ---
+
+    public LiveData<List<Expense>> getRecurringExpenses() {
+        return Transformations.switchMap(currentUserId, uid -> {
+            if (uid == null) return new MutableLiveData<>(new ArrayList<>());
+            return mDao.getRecurringExpenses(uid);
+        });
+    }
+
+    public LiveData<Goal> getGoal() { return mDao.getActiveGoal(); }
+    public void updateGoal(Goal goal) { AppDatabase.databaseWriteExecutor.execute(() -> mDao.updateGoal(goal)); }
+    public void setGoal(Goal goal) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            mDao.deleteGoals();
+            if (goal != null) mDao.insertGoal(goal);
+        });
+    }
+
+    // --- ЗАПИСЬ И ОБЛАЧНАЯ СИНХРОНИЗАЦИЯ ---
+
+    public void insert(Expense expense) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            mDao.insert(expense);
+            syncWithCloud(expense); // Отправка в Firebase
+        });
+    }
+
+    public void update(Expense expense) { AppDatabase.databaseWriteExecutor.execute(() -> mDao.update(expense)); }
+    public void delete(Expense expense) { AppDatabase.databaseWriteExecutor.execute(() -> mDao.delete(expense)); }
+    public void deleteAll() { AppDatabase.databaseWriteExecutor.execute(() -> mDao.deleteAll(currentUserId.getValue())); }
+
+    private void syncWithCloud(Expense expense) {
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid != null) {
+            FirebaseFirestore.getInstance().collection("users").document(uid)
+                    .collection("expenses").add(expense)
+                    .addOnSuccessListener(d -> Log.d("SYNC", "Expense synced!"))
+                    .addOnFailureListener(e -> Log.e("SYNC", "Sync error: " + e.getMessage()));
+        }
+    }
+
+    public void downloadDataFromCloud() {
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) return;
+        FirebaseFirestore.getInstance().collection("users").document(uid).collection("expenses").get()
+                .addOnSuccessListener(snapshots -> {
+                    AppDatabase.databaseWriteExecutor.execute(() -> {
+                        // Очищаем локальную БД от старых данных юзера
+                        mDao.deleteAll(uid);
+                        // Заливаем всё свежее из облака
+                        for (com.google.firebase.firestore.DocumentSnapshot doc : snapshots) {
+                            try {
+                                mDao.insert(new Expense(
+                                        doc.getString("title"),
+                                        doc.getDouble("amount"),
+                                        doc.getString("category"),
+                                        uid,
+                                        doc.getString("description"),
+                                        doc.getLong("date"),
+                                        doc.getBoolean("isRecurring")));
+                            } catch (Exception e) {
+                                Log.e("SYNC", "Parse error: " + e.getMessage());
+                            }
+                        }
+                    });
+                });
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/Goal.java">
+package com.example.expensetracker;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "goals")
+public class Goal {
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+    public String title;
+    public double targetAmount;
+    public double savedAmount;
+
+    public Goal(String title, double targetAmount, double savedAmount) {
+        this.title = title;
+        this.targetAmount = targetAmount;
+        this.savedAmount = savedAmount;
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/HomeFragment.java">
+package com.example.expensetracker;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
+
+public class HomeFragment extends Fragment {
+    private ExpenseViewModel viewModel;
+    private TextView tvTotalSum;
+    private ExpenseAdapter adapter;
+    private LinearLayout layoutEmpty;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        tvTotalSum = v.findViewById(R.id.tvTotalSum);
+        layoutEmpty = v.findViewById(R.id.layoutEmpty);
+        RecyclerView recyclerView = v.findViewById(R.id.recyclerView);
+
+        adapter = new ExpenseAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(ExpenseViewModel.class);
+
+        // Наблюдение за данными
+        viewModel.getSortedSimpleExpenses().observe(getViewLifecycleOwner(), expenses -> {
+            adapter.setExpenses(expenses);
+            layoutEmpty.setVisibility(expenses.isEmpty() ? View.VISIBLE : View.GONE);
+            updateTotalSum(expenses);
+        });
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView r, @NonNull RecyclerView.ViewHolder vh, @NonNull RecyclerView.ViewHolder t) { return false; }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                Expense deleted = adapter.getExpenseAt(position);
+                viewModel.delete(deleted);
+                com.google.android.material.snackbar.Snackbar.make(recyclerView, "Удалено: " + deleted.title, 3000)
+                        .setAction("ОТМЕНИТЬ", view -> viewModel.insert(deleted)).show();
+            }
+        }).attachToRecyclerView(recyclerView);
+
+        // Клик для редактирования
+        adapter.setOnItemClickListener(expense -> {
+            AddExpenseSheet sheet = new AddExpenseSheet();
+            sheet.setExistingExpense(expense);
+            sheet.setListener((title, amount, category, description, date, isRecurring, userId) -> {
+                expense.title = title; expense.amount = amount; expense.category = category;
+                expense.description = description; expense.date = date;
+                viewModel.update(expense);
+            });
+            sheet.show(getChildFragmentManager(), "edit_expense");
+        });
+
+        // Добавление
+        v.findViewById(R.id.fabAddNormal).setOnClickListener(view -> {
+            AddExpenseSheet sheet = new AddExpenseSheet();
+            sheet.setListener((title, amount, category, description, date, isRecurring, userId) -> {
+                viewModel.insert(new Expense(title, amount, category, userId, description, date, false));
+            });
+            sheet.show(getChildFragmentManager(), "add_expense");
+        });
+
+        // --- ПОПРАВИЛИ УСТАНОВКУ ЛИМИТА ---
+        v.findViewById(R.id.totalCard).setOnClickListener(view -> {
+            EditText etLimit = new EditText(getContext());
+            etLimit.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            etLimit.setText(String.valueOf(PreferenceManager.getBudget(requireContext())));
+
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Месячный лимит")
+                    .setMessage("Введите сумму лимита:")
+                    .setView(etLimit)
+                    .setPositiveButton("Сохранить", (d, w) -> {
+                        String val = etLimit.getText().toString();
+                        if (!val.isEmpty()) {
+                            PreferenceManager.setBudget(requireContext(), Float.parseFloat(val));
+                            // Перерисовываем UI
+                            updateTotalSum(viewModel.getSortedSimpleExpenses().getValue());
+                        }
+                    }).setNegativeButton("Отмена", null).show();
+        });
+
+        v.findViewById(R.id.totalCard).setOnLongClickListener(view -> {
+            String[] options = {"По дате (новые сверху)", "Сначала дорогие", "Сначала дешевые"};
+
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Сортировка списка")
+                    .setItems(options, (dialog, which) -> {
+                        // 0 - дата, 1 - дорого, 2 - дешево
+                        viewModel.setSortOrder(which);
+                    })
+                    .show();
+            return true;
+        });
+
+        v.findViewById(R.id.btnFilter).setOnClickListener(view -> {
+            View dialogView = getLayoutInflater().inflate(R.layout.dialog_filter, null);
+            EditText etMin = dialogView.findViewById(R.id.etMinPrice);
+            EditText etMax = dialogView.findViewById(R.id.etMaxPrice);
+            Spinner spinner = dialogView.findViewById(R.id.spinnerCategory);
+
+            String[] categories = {"Все", "Еда", "Транспорт", "Развлечения", "Жилье", "Здоровье", "Покупки", "Прочее"};
+            android.widget.ArrayAdapter<String> adapterSpin = new android.widget.ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, categories);
+            spinner.setAdapter(adapterSpin);
+
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Фильтр расходов")
+                    .setView(dialogView)
+                    .setPositiveButton("Применить", (d, w) -> {
+                        // Если поля пустые, ставим значения по умолчанию (от 0 до бесконечности)
+                        double min = etMin.getText().toString().isEmpty() ? 0 : Double.parseDouble(etMin.getText().toString());
+                        double max = etMax.getText().toString().isEmpty() ? 9999999 : Double.parseDouble(etMax.getText().toString());
+                        String selectedCat = spinner.getSelectedItem().toString();
+
+                        // Вызываем фильтрацию из ViewModel
+                        viewModel.getFiltered(min, max, selectedCat).observe(getViewLifecycleOwner(), filteredExpenses -> {
+                            // Обновляем список в адаптере
+                            adapter.setExpenses(filteredExpenses);
+                            // Скрываем/показываем заглушку "Нет расходов"
+                            layoutEmpty.setVisibility(filteredExpenses.isEmpty() ? View.VISIBLE : View.GONE);
+                            // ПЕРЕСЧИТЫВАЕМ И ОБНОВЛЯЕМ СУММУ БЮДЖЕТА под текущий фильтр
+                            updateTotalSum(filteredExpenses);
+                        });
+                    })
+                    .setNegativeButton("Сбросить", (d, w) -> {
+                        // При сбросе возвращаем обычный список
+                        viewModel.getSortedSimpleExpenses().observe(getViewLifecycleOwner(), expenses -> {
+                            adapter.setExpenses(expenses);
+                            layoutEmpty.setVisibility(expenses.isEmpty() ? View.VISIBLE : View.GONE);
+                            updateTotalSum(expenses);
+                        });
+                    })
+                    .show();
+        });
+
+        return v;
+    }
+
+    private void updateTotalSum(List<Expense> expenses) {
+        if (getView() == null || expenses == null) return;
+        double total = 0;
+        for (Expense e : expenses) total += e.amount;
+
+        String currency = PreferenceManager.getCurrency(requireContext());
+        float limit = PreferenceManager.getBudget(requireContext());
+
+        tvTotalSum.setText(String.format("%.2f %s", total, currency));
+
+        TextView tvStatus = getView().findViewById(R.id.tvBudgetStatus);
+        com.google.android.material.progressindicator.LinearProgressIndicator pb = getView().findViewById(R.id.budgetProgress);
+
+        if (pb != null && tvStatus != null) {
+            int progress = (limit > 0) ? (int) ((total / limit) * 100) : 0;
+            pb.setProgress(Math.min(progress, 100), true);
+            if (total >= limit) {
+                tvStatus.setText("Лимит превышен!");
+                pb.setIndicatorColor(android.graphics.Color.RED);
+            } else {
+                tvStatus.setText(String.format("Осталось: %.2f %s", (limit - total), currency));
+                pb.setIndicatorColor(android.graphics.Color.WHITE);
+            }
+        }
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/MainActivity.java">
+package com.example.expensetracker;
+
+import android.os.Bundle;
+import java.util.List;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class MainActivity extends AppCompatActivity {
+    private ExpenseViewModel viewModel;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        viewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
+        BottomNavigationView nav = findViewById(R.id.bottom_navigation);
+
+        // По умолчанию открываем список (HomeFragment)
+        loadFragment(new HomeFragment());
+
+        nav.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.nav_home) loadFragment(new HomeFragment());
+            else if (item.getItemId() == R.id.nav_stats) loadFragment(new StatsFragment());
+            else if (item.getItemId() == R.id.nav_planned) loadFragment(new PlannedFragment());
+            else if (item.getItemId() == R.id.nav_settings) loadFragment(new SettingsFragment()); // НОВАЯ СТРОКА
+            return true;
+        });
+    }
+
+    private void loadFragment(Fragment f) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, f)
+                .commit();
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/PlannedFragment.java">
+package com.example.expensetracker;
+
+import android.app.AlertDialog;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class PlannedFragment extends Fragment {
+    private ExpenseViewModel viewModel;
+    private ExpenseAdapter adapter;
+    private TextView tvPlannedTotal;
+
+    // Переменная для хранения текущей цели
+    private Goal activeGoal = null;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_planned, container, false);
+
+        tvPlannedTotal = v.findViewById(R.id.tvPlannedTotal);
+        RecyclerView rv = v.findViewById(R.id.rvPlanned);
+        View cardGoal = v.findViewById(R.id.cardGoal);
+        TextView tvGoalTitle = v.findViewById(R.id.tvGoalTitle);
+        TextView tvGoalStatus = v.findViewById(R.id.tvGoalStatus);
+        View btnReplenish = v.findViewById(R.id.btnReplenish);
+        com.google.android.material.progressindicator.LinearProgressIndicator goalProgress = v.findViewById(R.id.goalProgress);
+
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new ExpenseAdapter();
+        rv.setAdapter(adapter);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(ExpenseViewModel.class);
+
+        // 1. НАБЛЮДЕНИЕ ЗА ЦЕЛЬЮ (Самое важное)
+        viewModel.getGoal().observe(getViewLifecycleOwner(), goal -> {
+            activeGoal = goal; // Запоминаем цель для кликов
+
+            if (goal != null) {
+                tvGoalTitle.setText(goal.title);
+                String currency = PreferenceManager.getCurrency(requireContext());
+                tvGoalStatus.setText(String.format("%.0f / %.0f %s", goal.savedAmount, goal.targetAmount, currency));
+
+                int progress = (int) ((goal.savedAmount / goal.targetAmount) * 100);
+                goalProgress.setProgress(Math.min(progress, 100), true);
+
+                if (progress >= 100) goalProgress.setIndicatorColor(Color.parseColor("#4CAF50"));
+                else goalProgress.setIndicatorColor(Color.parseColor("#6750A4"));
+            } else {
+                tvGoalTitle.setText("Нажмите, чтобы создать цель");
+                tvGoalStatus.setText("0 / 0 ₽");
+                goalProgress.setProgress(0);
+            }
+        });
+
+        // 2. КЛИК ПО КНОПКЕ "ПОПОЛНИТЬ"
+        btnReplenish.setOnClickListener(view -> {
+            if (activeGoal != null) {
+                showAddMoneyDialog(activeGoal);
+            } else {
+                Toast.makeText(getContext(), "Сначала создайте цель!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // 3. КЛИК ПО КАРТОЧКЕ ДЛЯ УПРАВЛЕНИЯ
+        cardGoal.setOnClickListener(view -> {
+            if (activeGoal == null) {
+                showCreateGoalDialog();
+            } else {
+                String[] options = {"Изменить цель", "Удалить цель"};
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Управление целью")
+                        .setItems(options, (dialog, which) -> {
+                            if (which == 0) showCreateGoalDialog();
+                            else viewModel.setGoal(null); // Удаление
+                        }).show();
+            }
+        });
+
+        // 4. СПИСОК РЕГУЛЯРНЫХ ПЛАТЕЖЕЙ
+        viewModel.getRecurringExpenses().observe(getViewLifecycleOwner(), expenses -> {
+            List<Expense> recurringOnly = new ArrayList<>();
+            double sum = 0;
+            if (expenses != null) {
+                for (Expense e : expenses) {
+                    recurringOnly.add(e);
+                    sum += e.amount;
+                }
+            }
+            adapter.setExpenses(recurringOnly);
+            String currency = PreferenceManager.getCurrency(requireContext());
+            tvPlannedTotal.setText(String.format("%.2f %s", sum, currency));
+        });
+
+        v.findViewById(R.id.fabAddRecurring).setOnClickListener(view -> {
+            AddExpenseSheet sheet = new AddExpenseSheet();
+            sheet.setRecurringMode(true);
+            sheet.setListener((title, amount, category, description, date, isRecurring, userId) -> {
+                viewModel.insert(new Expense(title, amount, category, userId, description, date, true));
+            });
+            sheet.show(getChildFragmentManager(), "add_recurring");
+        });
+
+        return v;
+    }
+
+    private void showAddMoneyDialog(Goal goal) {
+        EditText et = new EditText(getContext());
+        et.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        et.setHint("Сумма");
+
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Пополнить: " + goal.title)
+                .setView(et)
+                .setPositiveButton("Добавить", (d, w) -> {
+                    String val = et.getText().toString();
+                    if (!val.isEmpty()) {
+                        goal.savedAmount += Double.parseDouble(val);
+                        viewModel.updateGoal(goal);
+                        Toast.makeText(getContext(), "Прибавлено!", Toast.LENGTH_SHORT).show();
+                    }
+                }).setNegativeButton("Отмена", null).show();
+    }
+
+    private void showCreateGoalDialog() {
+        LinearLayout layout = new LinearLayout(getContext());
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(60, 40, 60, 20);
+        EditText etT = new EditText(getContext()); etT.setHint("Название");
+        EditText etS = new EditText(getContext()); etS.setHint("Сумма");
+        etS.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);
+        layout.addView(etT); layout.addView(etS);
+
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Настройка цели")
+                .setView(layout)
+                .setPositiveButton("Готово", (d, w) -> {
+                    String t = etT.getText().toString();
+                    String s = etS.getText().toString();
+                    if (!t.isEmpty() && !s.isEmpty()) {
+                        viewModel.setGoal(new Goal(t, Double.parseDouble(s), 0));
+                    }
+                }).setNegativeButton("Отмена", null).show();
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/PreferenceManager.java">
+// Замени весь файл PreferenceManager.java на этот:
+package com.example.expensetracker;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class PreferenceManager {
+    private static final String PREF_NAME = "finance_prefs";
+    private static final String KEY_BUDGET = "monthly_budget";
+    private static final String KEY_USER_NAME = "user_name";
+    private static final String KEY_CURRENCY = "currency";
+    private static final String KEY_DARK_MODE = "dark_mode";
+
+    private static SharedPreferences getPrefs(Context context) {
+        return context.getApplicationContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+    }
+
+    public static void setBudget(Context context, float budget) {
+        getPrefs(context).edit().putFloat(KEY_BUDGET, budget).apply();
+    }
+
+    public static float getBudget(Context context) {
+        return getPrefs(context).getFloat(KEY_BUDGET, 50000f);
+    }
+
+    public static void setUserName(Context context, String name) {
+        getPrefs(context).edit().putString(KEY_USER_NAME, name).apply();
+    }
+
+    public static String getUserName(Context context) {
+        return getPrefs(context).getString(KEY_USER_NAME, "Пользователь");
+    }
+
+    public static void setCurrency(Context context, String currency) {
+        getPrefs(context).edit().putString(KEY_CURRENCY, currency).apply();
+    }
+
+    public static String getCurrency(Context context) {
+        return getPrefs(context).getString(KEY_CURRENCY, "₽");
+    }
+
+    public static void setDarkMode(Context context, boolean isDark) {
+        getPrefs(context).edit().putBoolean(KEY_DARK_MODE, isDark).apply();
+    }
+
+    public static boolean isDarkMode(Context context) {
+        return getPrefs(context).getBoolean(KEY_DARK_MODE, false);
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/SettingsFragment.java">
+package com.example.expensetracker;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+public class SettingsFragment extends Fragment {
+
+    private ExpenseViewModel viewModel;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // 1. Инфлейтим макет
+        View v = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        // 2. Инициализируем ViewModel
+        viewModel = new ViewModelProvider(requireActivity()).get(ExpenseViewModel.class);
+
+        // 3. Находим все View элементы
+        TextView tvName = v.findViewById(R.id.tvCurrentName);
+        TextView tvUserEmail = v.findViewById(R.id.tvUserEmail);
+        TextView tvCurrency = v.findViewById(R.id.tvCurrentCurrency);
+        MaterialSwitch switchDark = v.findViewById(R.id.switchDark);
+        View btnLogout = v.findViewById(R.id.btnLogout);
+        View cardName = v.findViewById(R.id.cardName);
+        View btnCurrency = v.findViewById(R.id.btnCurrency);
+        View btnInstruction = v.findViewById(R.id.btnInstruction);
+        View btnReset = v.findViewById(R.id.btnReset);
+
+        // --- БЛОК ПРОФИЛЯ ---
+
+        // Отображаем имя из настроек
+        tvName.setText(PreferenceManager.getUserName(requireContext()));
+
+        // Отображаем Email текущего пользователя Firebase
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null && tvUserEmail != null) {
+            tvUserEmail.setText(user.getEmail());
+        }
+
+        // Клик по имени для изменения
+        cardName.setOnClickListener(view -> {
+            EditText et = new EditText(getContext());
+            et.setText(tvName.getText());
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Ваше имя")
+                    .setView(et)
+                    .setPositiveButton("Сохранить", (d, w) -> {
+                        String newName = et.getText().toString();
+                        if (!newName.isEmpty()) {
+                            PreferenceManager.setUserName(requireContext(), newName);
+                            tvName.setText(newName);
+                        }
+                    })
+                    .setNegativeButton("Отмена", null)
+                    .show();
+        });
+
+        // Кнопка выхода из аккаунта
+        if (btnLogout != null) {
+            btnLogout.setOnClickListener(view -> {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Выход")
+                        .setMessage("Вы действительно хотите выйти из аккаунта?")
+                        .setPositiveButton("Выйти", (dialog, which) -> {
+                            // Выход из Firebase
+                            FirebaseAuth.getInstance().signOut();
+                            // Сброс ID в ViewModel, чтобы очистить списки
+                            viewModel.setUserId(null);
+
+                            // Переход на экран логина
+                            Intent intent = new Intent(getActivity(), AuthActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            getActivity().finish();
+                        })
+                        .setNegativeButton("Отмена", null)
+                        .show();
+            });
+        }
+
+        // --- БЛОК ВНЕШНЕГО ВИДА ---
+
+        // Отображаем текущую валюту
+        tvCurrency.setText(PreferenceManager.getCurrency(requireContext()));
+
+        // Смена валюты
+        btnCurrency.setOnClickListener(view -> {
+            String[] items = {"₽", "$", "€", "₸", "£", "Br"};
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Выберите валюту")
+                    .setItems(items, (d, which) -> {
+                        PreferenceManager.setCurrency(requireContext(), items[which]);
+                        tvCurrency.setText(items[which]);
+                        Toast.makeText(getContext(), "Валюта обновлена", Toast.LENGTH_SHORT).show();
+                    }).show();
+        });
+
+        // Темная тема
+        switchDark.setChecked(PreferenceManager.isDarkMode(requireContext()));
+        switchDark.setOnCheckedChangeListener((btn, isChecked) -> {
+            PreferenceManager.setDarkMode(requireContext(), isChecked);
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
+
+        // --- БЛОК ПОМОЩИ И ДАННЫХ ---
+
+        // Инструкция
+        btnInstruction.setOnClickListener(view -> showInstruction());
+
+        // Полный сброс данных текущего пользователя
+        btnReset.setOnClickListener(view -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Внимание!")
+                    .setMessage("Это удалит все ВАШИ записи. Продолжить?")
+                    .setPositiveButton("Удалить всё", (d, w) -> {
+                        viewModel.deleteAll(); // Удалит только записи текущего юзера
+                        Toast.makeText(getContext(), "Данные очищены", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("Отмена", null).show();
+        });
+
+        return v;
+    }
+
+    private void showInstruction() {
+        String msg = "💰 Главная: следите за бюджетом и лимитом на день.\n\n" +
+                "📊 Статистика: анализируйте траты по категориям.\n\n" +
+                "📅 План: ваши ежемесячные подписки и цели.\n\n" +
+                "☁️ Облако: ваши данные привязаны к Email и доступны на любом устройстве.";
+
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Руководство")
+                .setMessage(msg)
+                .setPositiveButton("Понятно", null)
+                .show();
+    }
+}
+</file>
+
+<file path="src/main/java/com/example/expensetracker/StatsFragment.java">
+package com.example.expensetracker;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.google.android.material.chip.ChipGroup;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class StatsFragment extends Fragment {
+    private PieChart pieChart;
+    private TextView tvTotalStats, tvEmptyStats;
+    private LinearLayout categoriesContainer;
+    private ExpenseViewModel viewModel;
+    private Map<String, Double> categorySumMap = new HashMap<>();
+    private double currentTotal = 0;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_stats, container, false);
+
+        pieChart = v.findViewById(R.id.pieChart);
+        tvTotalStats = v.findViewById(R.id.tvTotalStats);
+        tvEmptyStats = v.findViewById(R.id.tvEmptyStats);
+        categoriesContainer = v.findViewById(R.id.categoriesContainer);
+        ChipGroup periodChips = v.findViewById(R.id.periodChips);
+
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleRadius(75f);
+        pieChart.setHoleColor(Color.TRANSPARENT);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+        pieChart.setDrawEntryLabels(false);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(ExpenseViewModel.class);
+
+        periodChips.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            if (checkedIds.contains(R.id.chipWeek)) viewModel.setPeriod(7);
+            else if (checkedIds.contains(R.id.chipMonth)) viewModel.setPeriod(30);
+            else if (checkedIds.contains(R.id.chipYear)) viewModel.setPeriod(365);
+            else if (checkedIds.contains(R.id.chipAll)) viewModel.setPeriod(0);
+            else if (checkedIds.contains(R.id.chipCustom)) {
+                showRangePicker();
+            }
+        });
+
+        viewModel.getStatsExpenses().observe(getViewLifecycleOwner(), this::updateStats);
+
+        pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                PieEntry pe = (PieEntry) e;
+                showSingleCategory(pe.getLabel(), pe.getValue());
+            }
+            @Override
+            public void onNothingSelected() {
+                renderCategoryList(categorySumMap);
+            }
+        });
+
+        return v;
+    }
+
+    private void updateStats(List<Expense> expenses) {
+        if (expenses == null || expenses.isEmpty()) {
+            pieChart.setVisibility(View.GONE);
+            categoriesContainer.setVisibility(View.GONE);
+            tvEmptyStats.setVisibility(View.VISIBLE);
+            tvTotalStats.setText("0 ₽");
+        } else {
+            pieChart.setVisibility(View.VISIBLE);
+            categoriesContainer.setVisibility(View.VISIBLE);
+            tvEmptyStats.setVisibility(View.GONE);
+
+            currentTotal = 0;
+            categorySumMap.clear();
+            for (Expense e : expenses) {
+                currentTotal += e.amount;
+                categorySumMap.put(e.category, categorySumMap.getOrDefault(e.category, 0.0) + e.amount);
+            }
+            String currency = PreferenceManager.getCurrency(requireContext());
+            tvTotalStats.setText(String.format("%.2f %s", currentTotal, currency));
+
+            List<PieEntry> entries = new ArrayList<>();
+            List<Integer> colors = new ArrayList<>();
+            for (Map.Entry<String, Double> entry : categorySumMap.entrySet()) {
+                entries.add(new PieEntry(entry.getValue().floatValue(), entry.getKey()));
+                colors.add(CategoryColorMapper.getColor(entry.getKey()));
+            }
+
+            PieDataSet set = new PieDataSet(entries, "");
+            set.setColors(colors);
+            set.setSliceSpace(3f);
+            set.setDrawValues(false);
+
+            pieChart.setData(new PieData(set));
+            pieChart.animateY(800);
+            pieChart.invalidate();
+
+            renderCategoryList(categorySumMap);
+        }
+
+        // Обновление ачивок
+        RecyclerView rvAch = getView().findViewById(R.id.rvAchievements);
+        if (rvAch != null) {
+            rvAch.setAdapter(new AchievementAdapter(calculateAchievements(expenses != null ? expenses : new ArrayList<>())));
+        }
+    }
+
+    private void renderCategoryList(Map<String, Double> map) {
+        categoriesContainer.removeAllViews();
+        for (Map.Entry<String, Double> entry : map.entrySet()) {
+            addCategoryItem(entry.getKey(), entry.getValue());
+        }
+    }
+
+    private void showSingleCategory(String name, float amount) {
+        categoriesContainer.removeAllViews();
+        addCategoryItem(name, (double) amount);
+    }
+
+    private void addCategoryItem(String name, Double amount) {
+        String currency = PreferenceManager.getCurrency(requireContext());
+
+        View item = getLayoutInflater().inflate(R.layout.item_category_stat, categoriesContainer, false);
+        ((TextView)item.findViewById(R.id.tvCategoryName)).setText(name);
+        ((TextView)item.findViewById(R.id.tvCategoryAmount)).setText(
+                String.format("%.0f %s (%.1f%%)", amount, currency, (amount/currentTotal)*100)
+        );
+        item.findViewById(R.id.colorDot).setBackgroundColor(CategoryColorMapper.getColor(name));
+        categoriesContainer.addView(item);
+    }
+
+    private List<Achievement> calculateAchievements(List<Expense> expenses) {
+        List<Achievement> list = new ArrayList<>();
+
+        // Подготовка данных для проверок
+        double total = 0;
+        double maxSingleAmount = 0;
+        int smallPurchases = 0; // покупки меньше 150 руб
+        int nightPurchases = 0; // с 00:00 до 05:00
+        java.util.Set<String> categories = new java.util.HashSet<>();
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+
+        for (Expense e : expenses) {
+            total += e.amount;
+            categories.add(e.category);
+            if (e.amount > maxSingleAmount) maxSingleAmount = e.amount;
+            if (e.amount < 150) smallPurchases++;
+
+            cal.setTimeInMillis(e.date);
+            int hour = cal.get(java.util.Calendar.HOUR_OF_DAY);
+            if (hour >= 0 && hour < 5) nightPurchases++;
+        }
+
+        float budget = PreferenceManager.getBudget(requireContext());
+
+        // --- БРОНЗОВЫЕ (Начало пути) ---
+        list.add(new Achievement("Первая кровь", "Сделана первая запись", "💰",
+                expenses.size() > 0 ? 1 : 0, 1, Color.parseColor("#CD7F32")));
+
+        list.add(new Achievement("Новичок", "Добавьте 10 расходов", "🌱",
+                Math.min(expenses.size(), 10), 10, Color.parseColor("#CD7F32")));
+
+        // --- СЕРЕБРЯНЫЕ (Активность) ---
+        list.add(new Achievement("Разнообразие", "Используйте 4 категории", "🎨",
+                Math.min(categories.size(), 4), 4, Color.parseColor("#C0C0C0")));
+
+        list.add(new Achievement("Мелочёвщик", "10 покупок дешевле 150₽", "🪙",
+                Math.min(smallPurchases, 10), 10, Color.parseColor("#C0C0C0")));
+
+        list.add(new Achievement("Дисциплина", "Траты < 90% лимита", "📊",
+                (total > 0 && total < budget * 0.9) ? 1 : 0, 1, Color.parseColor("#C0C0C0")));
+
+        // --- ЗОЛОТЫЕ (Мастерство) ---
+        list.add(new Achievement("Шопоголик", "Добавьте 30 расходов", "🛒",
+                Math.min(expenses.size(), 30), 30, Color.parseColor("#FFD700")));
+
+        list.add(new Achievement("Инвестор", "Разовая трата > 5000₽", "🏗️",
+                maxSingleAmount >= 5000 ? 1 : 0, 1, Color.parseColor("#FFD700")));
+
+        list.add(new Achievement("Экономист", "Траты < 50% лимита", "📉",
+                (total > 0 && total < budget * 0.5) ? 1 : 0, 1, Color.parseColor("#FFD700")));
+
+        list.add(new Achievement("Всеядный", "Использованы все 7 категорий", "🌈",
+                Math.min(categories.size(), 7), 7, Color.parseColor("#FFD700")));
+
+        list.add(new Achievement("Ночная жрица", "5 покупок ночью (00:00-05:00)", "🍕",
+                Math.min(nightPurchases, 5), 5, Color.parseColor("#5D3FD3"))); // Фиолетовый
+
+        list.add(new Achievement("Миллионер", "Общие траты > 50 000₽", "🏢",
+                Math.min((int)total, 50000), 50000, Color.parseColor("#5D3FD3")));
+        return list;
+    }
+
+    private class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.VH> {
+        private List<Achievement> data;
+        public AchievementAdapter(List<Achievement> data) { this.data = data; }
+
+        @NonNull @Override public VH onCreateViewHolder(@NonNull ViewGroup p, int t) {
+            return new VH(getLayoutInflater().inflate(R.layout.item_achievement, p, false));
+        }
+
+        @Override public void onBindViewHolder(@NonNull VH h, int p) {
+            Achievement a = data.get(p);
+            h.title.setText(a.title);
+            h.desc.setText(a.description);
+
+            // Форматирование текста прогресса
+            if (a.maxProgress >= 1000) {
+                h.progressText.setText(String.format("%.1fk / %.1fk", a.currentProgress/1000.0, a.maxProgress/1000.0));
+            } else {
+                h.progressText.setText(a.currentProgress + " / " + a.maxProgress);
+            }
+
+            h.icon.setText(a.isUnlocked() ? a.icon : "🔒");
+            h.progress.setMax(a.maxProgress);
+            h.progress.setProgress(a.currentProgress);
+
+            // КРАСИМ КАРТОЧКУ (Исправлено)
+            if (a.isUnlocked()) {
+                h.card.setCardBackgroundColor(a.color); // Теперь вызываем у MaterialCardView
+                h.title.setTextColor(Color.WHITE);
+                h.desc.setTextColor(Color.parseColor("#EEEEEE"));
+                h.progressText.setTextColor(Color.WHITE);
+                h.progress.setIndicatorColor(Color.WHITE);
+                h.progress.setTrackColor(Color.parseColor("#40FFFFFF"));
+            } else {
+                h.card.setCardBackgroundColor(Color.WHITE);
+                h.title.setTextColor(Color.BLACK);
+                h.desc.setTextColor(Color.GRAY);
+                h.progressText.setTextColor(Color.GRAY);
+                h.progress.setIndicatorColor(a.color);
+                h.progress.setTrackColor(Color.parseColor("#15000000"));
+            }
+        }
+
+        @Override public int getItemCount() { return data.size(); }
+
+        class VH extends RecyclerView.ViewHolder {
+            TextView title, desc, icon, progressText;
+            com.google.android.material.progressindicator.LinearProgressIndicator progress;
+            com.google.android.material.card.MaterialCardView card; // Тип изменен на MaterialCardView
+
+            public VH(View v) { super(v);
+                title = v.findViewById(R.id.tvAchTitle);
+                desc = v.findViewById(R.id.tvAchDesc);
+                icon = v.findViewById(R.id.tvAchIcon);
+                progressText = v.findViewById(R.id.tvProgressText);
+                progress = v.findViewById(R.id.achProgress);
+                card = (com.google.android.material.card.MaterialCardView) v;
+            }
+        }
+    }
+    private void showRangePicker() {
+        com.google.android.material.datepicker.MaterialDatePicker<androidx.core.util.Pair<Long, Long>> picker =
+                com.google.android.material.datepicker.MaterialDatePicker.Builder.dateRangePicker()
+                        .setTitleText("Выберите период")
+                        .setSelection(new androidx.core.util.Pair<>(
+                                com.google.android.material.datepicker.MaterialDatePicker.todayInUtcMilliseconds(),
+                                com.google.android.material.datepicker.MaterialDatePicker.todayInUtcMilliseconds()
+                        ))
+                        .build();
+
+        picker.show(getChildFragmentManager(), "range_picker");
+
+        picker.addOnPositiveButtonClickListener(selection -> {
+            if (selection != null && selection.first != null && selection.second != null) {
+                viewModel.setCustomRange(selection.first, selection.second);
+
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd.MM", java.util.Locale.getDefault());
+                String rangeStr = sdf.format(new java.util.Date(selection.first)) + " - " + sdf.format(new java.util.Date(selection.second));
+                com.google.android.material.chip.Chip chipCustom = getView().findViewById(R.id.chipCustom);
+                chipCustom.setText(rangeStr);
+            }
+        });
+    }
+}
+</file>
+
+<file path="src/main/res/drawable/circle.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#FF0000" /> <!-- цвет будет меняться программно -->
+    <size android:width="16dp" android:height="16dp" />
+</shape>
+</file>
+
+<file path="src/main/res/drawable/ic_launcher_background.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#3DDC84"
+        android:pathData="M0,0h108v108h-108z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M9,0L9,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,0L19,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M29,0L29,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M39,0L39,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M49,0L49,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M59,0L59,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M69,0L69,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M79,0L79,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M89,0L89,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M99,0L99,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,9L108,9"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,19L108,19"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,29L108,29"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,39L108,39"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,49L108,49"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,59L108,59"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,69L108,69"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,79L108,79"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,89L108,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,99L108,99"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,29L89,29"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,39L89,39"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,49L89,49"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,59L89,59"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,69L89,69"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,79L89,79"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M29,19L29,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M39,19L39,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M49,19L49,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M59,19L59,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M69,19L69,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M79,19L79,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+</vector>
+</file>
+
+<file path="src/main/res/drawable/ic_launcher_foreground.xml">
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:pathData="M31,63.928c0,0 6.4,-11 12.1,-13.1c7.2,-2.6 26,-1.4 26,-1.4l38.1,38.1L107,108.928l-32,-1L31,63.928z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:endX="85.84757"
+                android:endY="92.4963"
+                android:startX="42.9492"
+                android:startY="49.59793"
+                android:type="linear">
+                <item
+                    android:color="#44000000"
+                    android:offset="0.0" />
+                <item
+                    android:color="#00000000"
+                    android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="nonZero"
+        android:pathData="M65.3,45.828l3.8,-6.6c0.2,-0.4 0.1,-0.9 -0.3,-1.1c-0.4,-0.2 -0.9,-0.1 -1.1,0.3l-3.9,6.7c-6.3,-2.8 -13.4,-2.8 -19.7,0l-3.9,-6.7c-0.2,-0.4 -0.7,-0.5 -1.1,-0.3C38.8,38.328 38.7,38.828 38.9,39.228l3.8,6.6C36.2,49.428 31.7,56.028 31,63.928h46C76.3,56.028 71.8,49.428 65.3,45.828zM43.4,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2c-0.3,-0.7 -0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C45.3,56.528 44.5,57.328 43.4,57.328L43.4,57.328zM64.6,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2s-0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C66.5,56.528 65.6,57.328 64.6,57.328L64.6,57.328z"
+        android:strokeWidth="1"
+        android:strokeColor="#00000000" />
+</vector>
+</file>
+
+<file path="src/main/res/drawable/rounded_sheet.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="?android:attr/colorBackground" />
+    <corners
+        android:topLeftRadius="24dp"
+        android:topRightRadius="24dp" />
+</shape>
+</file>
+
+<file path="src/main/res/layout/activity_auth.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вход / Регистрация"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp"/>
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/etPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Пароль"
+        android:layout_marginTop="8dp"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Войти"
+        android:layout_marginTop="24dp" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Создать аккаунт" />
+
+</LinearLayout>
+</file>
+
+<file path="src/main/res/layout/activity_main.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_nav_menu" />
+
+</RelativeLayout>
+</file>
+
+<file path="src/main/res/layout/dialog_add.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText android:id="@+id/etTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Что купил?" />
+    <EditText android:id="@+id/etAmount" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Сколько стоит?" android:inputType="numberDecimal" />
+    <EditText android:id="@+id/etCategory" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Категория (Еда, Такси...)" />
+
+</LinearLayout>
+</file>
+
+<file path="src/main/res/layout/dialog_filter.xml">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Диапазон цены" android:textStyle="bold" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <EditText android:id="@+id/etMinPrice" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:hint="От" android:inputType="number" />
+        <EditText android:id="@+id/etMaxPrice" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:hint="До" android:inputType="number" />
+    </LinearLayout>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Категория" android:textStyle="bold" android:layout_marginTop="16dp" />
+    <Spinner android:id="@+id/spinnerCategory" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" />
+</LinearLayout>
+</file>
+
+<file path="src/main/res/layout/expense_item.xml">
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/ivCategoryIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="#10000000"
+            android:src="@android:drawable/ic_menu_gallery" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <TextView android:id="@+id/tvTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="17sp" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+            <TextView android:id="@+id/tvCategory" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="13sp" android:textColor="#757575"/>
+            <TextView android:id="@+id/tvDescription" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="13sp" android:textColor="#999999" android:fontStyle="italic" android:visibility="gone" />
+        </LinearLayout>
+
+        <TextView android:id="@+id/tvAmount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="18sp" android:textStyle="bold" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+</file>
+
+<file path="src/main/res/layout/fragment_home.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:iconifiedByDefault="false"
+            app:queryHint="Поиск расходов..." />
+        <ImageButton
+            android:id="@+id/btnFilter"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_sort_by_size"
+            app:tint="?attr/colorPrimary" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/totalCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="#6750A4"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <TextView
+                    android:id="@+id/tvBudgetLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Итого потрачено:"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tvTotalSum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00 ₽"
+                    android:textColor="#FFFFFF"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/budgetProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:indicatorColor="#FFFFFF"
+                    app:trackColor="#40FFFFFF" />
+                <TextView
+                    android:id="@+id/tvBudgetStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#E0E0E0"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <!-- КНОПКА ДОБАВЛЕНИЯ (ВНУТРИ ФРАГМЕНТА) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+    <LinearLayout
+        android:id="@+id/layoutEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Нет расходов" />
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</file>
+
+<file path="src/main/res/layout/fragment_planned.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Регулярные платежи"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="#009688">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Обязательно к оплате в месяц:"
+                    android:textColor="#FFFFFF" />
+                <TextView
+                    android:id="@+id/tvPlannedTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 ₽"
+                    android:textColor="#FFFFFF"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardGoal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#E0E0E0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tvGoalTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Моя цель"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- КНОПКА ПОПОЛНЕНИЯ -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnReplenish"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="Пополнить"
+                        app:icon="@android:drawable/ic_input_add" />
+                </RelativeLayout>
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/goalProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:trackThickness="8dp"
+                    app:trackCornerRadius="4dp" />
+
+                <TextView
+                    android:id="@+id/tvGoalStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="0 / 0 ₽"
+                    android:textColor="?attr/colorPrimary"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPlanned"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+    <!-- КНОПКА ДОБАВЛЕНИЯ ПОДПИСКИ -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddRecurring"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        app:backgroundTint="#009688"
+        app:tint="@color/white"
+        app:srcCompat="@android:drawable/ic_menu_today" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</file>
+
+<file path="src/main/res/layout/fragment_settings.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Настройки"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- СЕКЦИЯ: ПРОФИЛЬ -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ПРОФИЛЬ"
+            android:textSize="12sp"
+            android:layout_marginStart="8dp"
+            android:textColor="?attr/colorPrimary"/>
+
+        <!-- Карточка Имени (уже была) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#E0E0E0">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="👤" android:textSize="20sp" />
+                <TextView android:id="@+id/tvCurrentName" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Ваше имя" android:layout_marginStart="16dp" android:textStyle="bold"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Изменить" android:textColor="?attr/colorPrimary" android:textSize="12sp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- НОВАЯ КАРТОЧКА: Почта пользователя -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#E0E0E0">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📧" android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/tvUserEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="email@example.com"
+                    android:layout_marginStart="16dp"
+                    android:textStyle="normal"
+                    android:textColor="#757575"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- НОВАЯ КНОПКА: Выход из аккаунта -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Выйти из аккаунта"
+            android:textColor="#F44336"
+            android:textSize="12sp"
+            app:icon="@android:drawable/ic_lock_power_off"
+            app:iconTint="#F44336"
+            app:iconSize="14dp" />
+        <!-- СЕКЦИЯ: ВНЕШНИЙ ВИД -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ВНЕШНИЙ ВИД" android:textSize="12sp" android:layout_marginTop="24dp" android:layout_marginStart="8dp" android:textColor="?attr/colorPrimary"/>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#E0E0E0">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                <!-- Темная тема -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🌙" android:textSize="20sp" />
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Темная тема" android:layout_marginStart="16dp" android:textStyle="bold"/>
+                    <com.google.android.material.materialswitch.MaterialSwitch android:id="@+id/switchDark" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0" android:layout_marginHorizontal="16dp"/>
+                <!-- Валюта -->
+                <LinearLayout android:id="@+id/btnCurrency" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💵" android:textSize="20sp" />
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Основная валюта" android:layout_marginStart="16dp" android:textStyle="bold"/>
+                    <TextView android:id="@+id/tvCurrentCurrency" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="₽" android:textColor="#757575"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- СЕКЦИЯ: ПОМОЩЬ -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ПОМОЩЬ" android:textSize="12sp" android:layout_marginTop="24dp" android:layout_marginStart="8dp" android:textColor="?attr/colorPrimary"/>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnInstruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#E0E0E0">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📖" android:textSize="20sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Инструкция" android:layout_marginStart="16dp" android:textStyle="bold"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="❯" android:textColor="#BDBDBD"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- СЕКЦИЯ: ДАННЫЕ -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReset"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Удалить все данные"
+            android:textColor="#F44336"
+            app:icon="@android:drawable/ic_menu_delete"
+            app:iconTint="#F44336"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ExpenseTracker v1.5\nКурсовая работа"
+            android:textAlignment="center"
+            android:layout_marginTop="16dp"
+            android:textColor="#9E9E9E"
+            android:textSize="10sp"/>
+
+    </LinearLayout>
+</ScrollView>
+</file>
+
+<file path="src/main/res/layout/fragment_stats.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Анализ расходов"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <!-- АЧИВКИ -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ваши достижения"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAchievements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <!-- КАРТОЧКА СУММЫ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="?attr/colorPrimaryContainer">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Всего потрачено" />
+                <TextView
+                    android:id="@+id/tvTotalStats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 ₽"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ПЕРИОДЫ -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/periodChips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:singleSelection="true">
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipWeek"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Неделя"
+                android:checked="true" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipMonth"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Месяц" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipYear"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Год" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipAll"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Всё время" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipCustom"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Выбрать даты"
+                app:chipIcon="@android:drawable/ic_menu_my_calendar" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- ЗАГЛУШКА -->
+        <TextView
+            android:id="@+id/tvEmptyStats"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="Нет данных за период"
+            android:gravity="center"
+            android:visibility="gone" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="16dp" />
+
+        <LinearLayout
+            android:id="@+id/categoriesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
+</file>
+
+<file path="src/main/res/layout/item_achievement.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="4dp"
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvAchIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="#20000000"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:text="🔒" />
+
+        <TextView
+            android:id="@+id/tvAchTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:textSize="14sp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/tvAchDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:text="Описание"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="center"
+            android:textColor="#60000000" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/achProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:trackThickness="4dp"
+            app:trackCornerRadius="2dp"
+            app:indicatorColor="?attr/colorPrimary" />
+
+        <TextView
+            android:id="@+id/tvProgressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginTop="4dp"
+            android:text="0/10" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+</file>
+
+<file path="src/main/res/layout/item_category_stat.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="8dp"
+    android:paddingHorizontal="4dp">
+
+    <View
+        android:id="@+id/colorDot"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/circle"
+        android:layout_marginEnd="12dp" />
+
+    <TextView
+        android:id="@+id/tvCategoryName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Категория"
+        android:textSize="16sp"
+        android:textColor="?android:attr/textColorPrimary" />
+
+    <TextView
+        android:id="@+id/tvCategoryAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 ₽"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="?android:attr/textColorPrimary" />
+
+</LinearLayout>
+</file>
+
+<file path="src/main/res/layout/sheet_add_expense.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/rounded_sheet">
+
+    <View android:layout_width="40dp" android:layout_height="4dp"
+        android:layout_gravity="center" android:background="#E0E0E0"
+        android:layout_marginBottom="16dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/sheetTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="Новый расход"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"/>
+
+        <!-- КНОПКА КАЛЕНДАРЯ В УГЛУ -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPickDateTop"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="0dp"
+            app:icon="@android:drawable/ic_menu_my_calendar"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="24dp" />
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:hint="Название">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/etTitle" android:layout_width="match_parent" android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" android:hint="Сумма (₽)">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/etAmount" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" android:hint="Комментарий">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/etDescription" android:layout_width="match_parent" android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="Категория" android:layout_marginTop="16dp"/>
+
+    <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:scrollbars="none" android:layout_marginTop="8dp">
+        <com.google.android.material.chip.ChipGroup android:id="@+id/categoryChips" android:layout_width="wrap_content" android:layout_height="wrap_content" app:singleSelection="true">
+            <com.google.android.material.chip.Chip style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Еда" android:id="@+id/chipFood"/>
+            <com.google.android.material.chip.Chip style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Транспорт" />
+            <com.google.android.material.chip.Chip style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Развлечения" />
+            <com.google.android.material.chip.Chip style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Жилье" />
+            <com.google.android.material.chip.Chip style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Покупки" />
+            <com.google.android.material.chip.Chip style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Прочее" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSave" android:layout_width="match_parent"
+        android:layout_height="60dp" android:layout_marginTop="24dp"
+        android:text="Сохранить" app:cornerRadius="16dp" />
+</LinearLayout>
+</file>
+
+<file path="src/main/res/menu/bottom_nav_menu.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="Список" />
+    <item
+        android:id="@+id/nav_stats"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="Статистика" />
+    <item
+        android:id="@+id/nav_planned"
+        android:icon="@android:drawable/ic_menu_today"
+        android:title="План" />
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="Настройки" />
+</menu>
+</file>
+
+<file path="src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_background" />
+    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+    <monochrome android:drawable="@drawable/ic_launcher_foreground" />
+</adaptive-icon>
+</file>
+
+<file path="src/main/res/mipmap-anydpi-v26/ic_launcher.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_background" />
+    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+    <monochrome android:drawable="@drawable/ic_launcher_foreground" />
+</adaptive-icon>
+</file>
+
+<file path="src/main/res/values-night/themes.xml">
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ExpenseTracker" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    </style>
+</resources>
+</file>
+
+<file path="src/main/res/values/colors.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
+</file>
+
+<file path="src/main/res/values/strings.xml">
+<resources>
+    <string name="app_name">ExpenseTracker</string>
+</resources>
+</file>
+
+<file path="src/main/res/values/themes.xml">
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ExpenseTracker" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.ExpenseTracker" parent="Base.Theme.ExpenseTracker" />
+
+
+</resources>
+</file>
+
+<file path="src/main/res/xml/backup_rules.xml">
+<?xml version="1.0" encoding="utf-8"?><!--
+   Sample backup rules file; uncomment and customize as necessary.
+   See https://developer.android.com/guide/topics/data/autobackup
+   for details.
+   Note: This file is ignored for devices older than API 31
+   See https://developer.android.com/about/versions/12/backup-restore
+-->
+<full-backup-content>
+    <!--
+   <include domain="sharedpref" path="."/>
+   <exclude domain="sharedpref" path="device.xml"/>
+-->
+</full-backup-content>
+</file>
+
+<file path="src/main/res/xml/data_extraction_rules.xml">
+<?xml version="1.0" encoding="utf-8"?><!--
+   Sample data extraction rules file; uncomment and customize as necessary.
+   See https://developer.android.com/about/versions/12/backup-restore#xml-changes
+   for details.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- TODO: Use <include> and <exclude> to control what is backed up.
+        <include .../>
+        <exclude .../>
+        -->
+    </cloud-backup>
+    <!--
+    <device-transfer>
+        <include .../>
+        <exclude .../>
+    </device-transfer>
+    -->
+</data-extraction-rules>
+</file>
+
+<file path="src/test/java/com/example/expensetracker/ExampleUnitTest.java">
+package com.example.expensetracker;
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ */
+public class ExampleUnitTest {
+    @Test
+    public void addition_isCorrect() {
+        assertEquals(4, 2 + 2);
+    }
+}
+</file>
+
+</files>

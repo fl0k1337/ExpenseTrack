@@ -64,19 +64,20 @@ public class HomeFragment extends Fragment {
         adapter.setOnItemClickListener(expense -> {
             AddExpenseSheet sheet = new AddExpenseSheet();
             sheet.setExistingExpense(expense);
-            sheet.setListener((title, amount, category, description, date, isRecurring, userId) -> {
+            sheet.setListener((title, amount, category, description, date, isRecurring) -> {
                 expense.title = title; expense.amount = amount; expense.category = category;
                 expense.description = description; expense.date = date;
                 viewModel.update(expense);
             });
+
             sheet.show(getChildFragmentManager(), "edit_expense");
         });
 
         // Добавление
         v.findViewById(R.id.fabAddNormal).setOnClickListener(view -> {
             AddExpenseSheet sheet = new AddExpenseSheet();
-            sheet.setListener((title, amount, category, description, date, isRecurring, userId) -> {
-                viewModel.insert(new Expense(title, amount, category, userId, description, date, false));
+            sheet.setListener((title, amount, category, description, date, isRecurring) -> {
+                viewModel.insert(new Expense(title, amount, category, description, date, false));
             });
             sheet.show(getChildFragmentManager(), "add_expense");
         });

@@ -6,9 +6,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import com.google.firebase.auth.FirebaseAuth;
 
-@Database(entities = {Expense.class, Goal.class}, version = 7, exportSchema = false)
+@Database(entities = {Expense.class, Goal.class}, version = 8, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract ExpenseDao expenseDao();
     private static volatile AppDatabase INSTANCE;
